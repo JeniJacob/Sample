@@ -1,98 +1,40 @@
-import random
 import time
-import matplotlib.pyplot as plt
+def function(txt,pat,m,n):
+    for i in range(m):
+        
+        if txt[i:n+i]==pat:
+            return i
+    return -1
 
-# Function to generate random product codes
-def generate_product_codes(n):
-    products = []
-    for i in range(n):
-        code = "P" + str(random.randint(1000, 9999))
-        products.append(code)
-    return products
+txt = input("Enter a text : ")
+pat = input("Enter a pattern : ")
+stime=time.time()
+time.sleep(1)
+print(function(txt,pat,len(txt),len(pat)))
+etime=time.time()
+print(etime-stime-1)
 
+# Create placeholder files if they don't exist
+import os
+if not os.path.exists('input1.txt'):
+    with open('input1.txt', 'w') as f: f.write('')
+if not os.path.exists('pattern.txt'):
+    with open('pattern.txt', 'w') as f: f.write('')
 
-# Linear Search Function
-def linear_search(arr, target):
-    comparisons = 0
-
-    start_time = time.perf_counter()
-
-    for i in range(len(arr)):
-        comparisons += 1
-
-        if arr[i] == target:
-            end_time = time.perf_counter()
-            execution_time = (end_time - start_time) * 1000
-            return i, comparisons, execution_time
-
-    end_time = time.perf_counter()
-    execution_time = (end_time - start_time) * 1000
-
-    return -1, comparisons, execution_time
-
-
-# Different input sizes
-sizes = [100, 500, 1000, 5000, 10000]
-
-times = []
-comparisons_list = []
-
-print("WAREHOUSE PRODUCT AVAILABILITY DETECTION\n")
-
-for n in sizes:
-
-    # Generate product codes
-    products = generate_product_codes(n)
-
-    # Best Case -> first element
-    best_target = products[0]
-
-    # Average Case -> middle element
-    avg_target = products[n // 2]
-
-    # Worst Case -> not present
-    worst_target = "P0000"
-
-    print(f"\nInput Size = {n}")
-
-    # Best Case
-    pos, comp, exec_time = linear_search(products, best_target)
-    print("\nBest Case:")
-    print("Target Found at Position:", pos)
-    print("Comparisons:", comp)
-    print("Execution Time (ms):", exec_time)
-
-    # Average Case
-    pos, comp, exec_time = linear_search(products, avg_target)
-    print("\nAverage Case:")
-    print("Target Found at Position:", pos)
-    print("Comparisons:", comp)
-    print("Execution Time (ms):", exec_time)
-
-    # Worst Case
-    pos, comp, exec_time = linear_search(products, worst_target)
-    print("\nWorst Case:")
-    print("Target Not Found")
-    print("Comparisons:", comp)
-    print("Execution Time (ms):", exec_time)
-
-    times.append(exec_time)
-    comparisons_list.append(comp)
-
-# Plot 1: Number of Elements vs Execution Time
-plt.figure(figsize=(8, 5))
-plt.plot(sizes, times, marker='o')
-plt.title("Number of Elements vs Execution Time")
-plt.xlabel("Number of Elements")
-plt.ylabel("Execution Time (ms)")
-plt.grid(True)
-plt.show()
-
-# Plot 2: Number of Elements vs Comparisons
-plt.figure(figsize=(8, 5))
-plt.plot(sizes, comparisons_list, marker='o')
-plt.title("Number of Elements vs Comparisons")
-plt.xlabel("Number of Elements")
-plt.ylabel("Number of Comparisons")
-plt.grid(True)
-plt.show()
+import time 
+def function1(txt,pat,m,n):
+    for i in range(m):
+        if txt[i:n+i] == pat:
+            return i
+    return -1
+f = open("input1.txt", "r")
+f2 = open("pattern.txt", "r")
+txt = f.read().strip()
+pat = f2.read().strip()
+stime =time.time()
+time.sleep(1)
+print(function1(txt,pat,len(txt),len(pat)))
+etime =time.time()
+print(len(txt))
+print(len(pat))      
+print(etime-stime+1)
